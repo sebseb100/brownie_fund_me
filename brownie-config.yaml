@@ -1,0 +1,31 @@
+#this is telling brownie "When you run scripts grab the environment variables in .env"
+dotenv: .env
+#networks will allow us to define addresses for each chain 
+networks:
+  default: development 
+  rinkeby:
+    eth_usd_price_feed: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e'
+    verify: True
+  #this is the fork
+  mainnet-fork:
+    eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'
+    verify: False
+  #fork ^^
+  development:
+    verify: False
+  ganache-locality:
+    verify: False
+
+wallets:
+  from_key: ${PRIVATE_KEY}
+  #when you use ${} it automatically gets transformed into the environment variable
+
+
+dependencies:
+  # - <organization/repository>@<version>
+  - smartcontractkit/chainlink-brownie-contracts@1.1.1
+
+compiler:
+  solc:
+    remappings:
+      - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
